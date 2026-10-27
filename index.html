@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Island 3D - Mobile</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        #game-container {
+            margin-top: 50px;
+        }
+        canvas {
+            background-color: #4CAF50;
+            border: 4px solid #fff;
+            border-radius: 10px;
+        }
+        .btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h1>🌴 Survival Island 🌴</h1>
+        <p>Wood Collected: <span id="wood-count">0</span></p>
+        
+        <!-- Game Screen -->
+        <canvas id="gameCanvas" width="300" height="300"></canvas>
+        
+        <div>
+            <button class="btn" onclick="collectWood()">🪵 Collect Wood</button>
+        </div>
+    </div>
+
+    <script>
+        let wood = 0;
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Player & Resource positions
+        let player = { x: 140, y: 140, size: 20, color: "#2196F3" };
+        let tree = { x: 50, y: 50, size: 25, color: "#8B4513" };
+
+        function draw() {
+            // Clear screen
+            ctx.fillStyle = "#4CAF50";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Tree
+            ctx.fillStyle = tree.color;
+            ctx.fillRect(tree.x, tree.y, tree.size, tree.size);
+
+            // Draw Player
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.size, player.size);
+        }
+
+        function collectWood() {
+            wood += 1;
+            document.getElementById("wood-count").innerText = wood;
+            
+            // Move tree randomly on collect
+            tree.x = Math.random() * (canvas.width - 40);
+            tree.y = Math.random() * (canvas.height - 40);
+            draw();
+        }
+
+        // Initial draw
+        draw();
+    </script>
+
+</body>
+  </html>
+  
